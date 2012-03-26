@@ -45,6 +45,8 @@ Perform a SPARQL 1.1 update:
 	
 	Stardog.Update("delete where { :node1 dcterms:audience ?o }; insert data { :node2 dc:title \"My name\"; };");
 
+There are other functions that you can explore and will be documented later.
+
 
 
 
