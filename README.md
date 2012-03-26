@@ -8,6 +8,13 @@ To set up it you just need to update the first few functions to define
 the data connection string, user name nad password.
 
 
+Requirements
+-------------------------------------------------------------
+A copy of the compiled dotNetRDF DLL and some other dependences are included.  For the latest
+version and for more details visit http://dotnetrdf.org/
+
+
+
 Usage
 -------------------------------------------------------------
 
