@@ -61,7 +61,7 @@ There are other functions that you can explore and will be documented later.
 
 New BSD License
 -------------------------------------------------------------
-Copyright (c) 2012, Ron Michael Zettlemoyer
+Copyright (c) 2012, Ron Michael Zettlemoyer.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
