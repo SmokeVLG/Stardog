@@ -176,28 +176,62 @@ public class Stardog
     }
 
 
+    /// <summary>
+    /// Execute insert or delete SPARQL queries against Stardog;
+    /// separate multiple statements with a semicolon
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    public static bool Update(StringBuilder command)
+    {
+        return Update(command.ToString());
+    }
+
+
 
     /// <summary>
     /// Execute insert or delete SPARQL queries against Stardog;
     /// separate multiple statements with a semicolon
     /// </summary>
-    /// <param name="command">A SPARQL 1.1 update query</param>
+    /// <param name="command"></param>
     /// <returns></returns>
     public static bool Update(string command)
     {
+
         using (StardogConnector dog = new StardogConnector(ConnectionString(), ConnectionDatabase(), ConnectionUser(), ConnectionPassword()))
         {
 
-            GenericUpdateProcessor processor = new GenericUpdateProcessor(dog);
+            try
+            {
 
-            SparqlUpdateParser parser = new SparqlUpdateParser();
+                dog.Begin(); // wrap all the statements in this command into one transaction; otherwise stardog will run them as separate transactions
 
-            processor.ProcessCommandSet(parser.ParseFromString(Prefixes() + command));
-            
+                GenericUpdateProcessor processor = new GenericUpdateProcessor(dog);
+
+                SparqlUpdateParser parser = new SparqlUpdateParser();
+
+                processor.ProcessCommandSet(parser.ParseFromString(Prefixes() + command));
+
+                dog.Commit();
+
+                return true;
+
+            }
+            catch (Exception err)
+            {
+
+                try
+                {
+                    dog.Rollback();
+                }
+                catch { }
+
+                throw err;
+
+            }
+
         }
-        
 
-        return true;
 
     }
 
