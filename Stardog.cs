@@ -38,23 +38,23 @@ public class Stardog
 
     public static string ConnectionString()
     {
-        return "http://servername:port/";
+        return "http://localhost:5820/";
     }
 
 
     public static string ConnectionDatabase()
     {
-        return "databasename"; 
+        return "main_ontology"; 
     }
 
     public static string ConnectionUser()
     {
-        return "user";
+        return "admin";
     }
 
     public static string ConnectionPassword()
     {
-        return "password";
+        return "admin";
     }
 
 
@@ -249,7 +249,7 @@ public class Stardog
     {
         using (StardogConnector dog = new StardogConnector(ConnectionString(), ConnectionDatabase(), rm, ConnectionUser(), ConnectionPassword()))
         {
-            Object results = dog.Query(Prefixes() + command);
+            Object results = dog.Query(command);
             
             if (results is SparqlResultSet)
             {
